@@ -5,15 +5,15 @@ export interface IProduct {
   price: number;
 }
 
-export interface IOrderItem {
+export interface IProductItem {
   product: IProduct;
   quantity: number;
   subtotal: number;
-  id: number;
+  id: string;
 }
 
 export interface IOrder {
-  orderItems: IOrderItem[];
+  orderItems: IProductItem[];
   total: number;
   tip: number;
   id?: string;

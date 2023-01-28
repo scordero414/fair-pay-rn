@@ -9,9 +9,14 @@ export type StackNavigatorParamList = {
   };
 };
 
-type ChecksScreenNavigationProp = NativeStackNavigationProp<
+export type ChecksScreenNavigationProp = NativeStackNavigationProp<
   StackNavigatorParamList,
   'Checks'
+>;
+
+export type OrderScreenNavigationProp = NativeStackNavigationProp<
+  StackNavigatorParamList,
+  'Order'
 >;
 
 export type OrderScreenRouteProp = RouteProp<StackNavigatorParamList, 'Order'>;
