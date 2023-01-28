@@ -1,13 +1,14 @@
-import {VStack} from 'native-base';
-import React from 'react';
-import {IOrder} from '../../../types/order';
-import {OrderItem} from './OrderItem';
+import { VStack } from 'native-base';
+import React, { Dispatch, SetStateAction } from 'react';
+import { IOrder } from '../../../types/order';
+import { OrderItem } from './OrderItem';
 
 interface IOrdersListProps {
   orders: IOrder[];
+  setOrders: Dispatch<SetStateAction<IOrder[]>>;
 }
 
-export const OrdersList = ({orders}: IOrdersListProps) => {
+export const OrdersList = ({ orders, setOrders }: IOrdersListProps) => {
   return (
     <VStack space={3}>
       {orders.map((order, index) => (
@@ -15,8 +16,12 @@ export const OrdersList = ({orders}: IOrdersListProps) => {
           key={order.id}
           order={order}
           clientNumber={index + 1}
-          onSave={function (check: IOrder): void {
-            console.log(check);
+          onChangeOrder={changedOrder => {
+            setOrders(prev => {
+              const clone = [...prev];
+              clone[index] = changedOrder;
+              return clone;
+            });
           }}
         />
       ))}

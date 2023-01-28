@@ -1,7 +1,7 @@
-import {HStack, Image, Input, Text} from 'native-base';
-import React, {useState} from 'react';
-import {productImages} from '../../../assets/imgs/products/product-images';
-import {IProductItem} from '../../../types/order';
+import { HStack, Image, Input, Text } from 'native-base';
+import React, { useState } from 'react';
+import { productImages } from '../../../assets/imgs/products/product-images';
+import { IProductItem } from '../../../types/order';
 
 interface IProductItemProps {
   productItem: IProductItem;

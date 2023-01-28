@@ -1,19 +1,19 @@
-import {Heading, Input, Text, VStack} from 'native-base';
-import React, {useState} from 'react';
-import {IOrder, IProductItem, IProduct} from '../../../types/order';
+import { Center, Heading, Input, Text, VStack } from 'native-base';
+import React, { useEffect, useState } from 'react';
+import { IOrder, IProductItem, IProduct } from '../../../types/order';
 import uuid from 'react-native-uuid';
-import {ProductItem} from './ProductItem';
+import { ProductItem } from './ProductItem';
 
 interface IOrderItemProps {
   order: IOrder;
   clientNumber: number;
-  onSave: (check: IOrder) => void;
+  onChangeOrder: (order: IOrder) => void;
   readonly?: boolean;
 }
 export const OrderItem = ({
   order,
   clientNumber,
-  onSave,
+  onChangeOrder,
   readonly = false,
 }: IOrderItemProps) => {
   const [orderProducts, setOrderProducts] = useState<IProductItem[]>(
@@ -44,11 +44,23 @@ export const OrderItem = ({
         !orderProducts.find(orderItem => orderItem.product.id === value.id),
     ) as IProduct[];
 
+  useEffect(() => {
+    onChangeOrder({
+      orderItems: orderProducts,
+      total: orderProducts.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.subtotal;
+      }, 0),
+      tip: 0,
+      id: order.id,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orderProducts]);
+
   const onSelectProduct = (product: IProduct) => {
     const myuuid = uuid.v4() as string;
     setProductToSearch('');
     setOrderProducts(prev => [
-      {id: myuuid, product, quantity: 1, subtotal: product.price},
+      { id: myuuid, product, quantity: 1, subtotal: product.price },
       ...prev,
     ]);
   };
@@ -121,6 +133,12 @@ export const OrderItem = ({
             ))
           : null}
       </VStack>
+
+      <Center py={5}>
+        <Heading size="md" alignSelf="center" pt={2} color="primary.900">
+          Total ${order.total}
+        </Heading>
+      </Center>
     </VStack>
   );
 };

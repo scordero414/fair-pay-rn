@@ -1,10 +1,10 @@
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Box, NativeBaseProvider} from 'native-base';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Box, NativeBaseProvider } from 'native-base';
 import React from 'react';
-import {StackNavigatorParamList} from '../types/navigation';
-import {Checks} from './screens/Checks/Checks';
-import {Order} from './screens/Order/Order';
+import { StackNavigatorParamList } from '../types/navigation';
+import { Checks } from './screens/Checks/Checks';
+import { Order } from './screens/Order/Order';
 
 const Stack = createNativeStackNavigator<StackNavigatorParamList>();
 
@@ -21,12 +21,12 @@ const App = () => {
         <Stack.Screen
           name={'Checks'}
           component={Checks}
-          options={{...withoutHeader}}
+          options={{ ...withoutHeader }}
         />
         <Stack.Screen
           name={'Order'}
           component={Order}
-          options={{...withoutHeader}}
+          options={{ ...withoutHeader }}
         />
       </Stack.Navigator>
     </NavigationContainer>
