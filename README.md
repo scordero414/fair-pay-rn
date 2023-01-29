@@ -3,8 +3,8 @@
 `yarn install`
 
 ## For IOS.
-  `cd ios && pod install`
-  `yarn ios` or Open Xcode - FairPayRN.xcworkspace and run the App in any Device
+  - `cd ios && pod install`
+  - `yarn ios` or Open Xcode - FairPayRN.xcworkspace and run the App in any Device
   
 ## For Android.
   `yarn android`
