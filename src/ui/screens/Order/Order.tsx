@@ -38,7 +38,7 @@ export const Order = ({ navigation }: IOrderProps) => {
     if (currentCheck) {
       setCheck(currentCheck);
       setOrders(currentCheck?.orders);
-      setTable(currentCheck.total);
+      setTable(currentCheck.table);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

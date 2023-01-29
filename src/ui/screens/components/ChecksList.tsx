@@ -19,6 +19,7 @@ export const ChecksList = ({
       <HStack>
         {checks.map(check => (
           <CheckInfo
+            key={check.id}
             check={check}
             onMarkAsDone={() => onMarkAsDone(check)}
             onSeeDetails={() => onSeeDetails(check)}

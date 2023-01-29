@@ -53,7 +53,7 @@ export const Checks = ({ navigation }: IChecksProps) => {
             Checks made
           </Heading>
           <ChecksList
-            checks={checks.filter(check => !check.active)}
+            checks={checks.filter(check => !check.active).reverse()}
             onMarkAsDone={check => {
               changeCheckState(check);
             }}

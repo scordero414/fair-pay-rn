@@ -31,7 +31,7 @@ export const CheckInfo = ({
         <Button
           variant="unstyled"
           position="absolute"
-          right={2}
+          right={5}
           top={2}
           zIndex={1}
           onPress={() => {
@@ -53,7 +53,7 @@ export const CheckInfo = ({
             mt={4}
             numberOfLines={2}
             ellipsizeMode="tail">
-            Orden ID: {id}
+            Orden ID: {'\n'} {id}
           </Text>
           <Heading>Table: {table}</Heading>
           <Heading>Total: ${total}</Heading>
