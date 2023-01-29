@@ -1,8 +1,9 @@
-import { Center, Heading, Input, Text, VStack } from 'native-base';
+import { Box, Center, Heading, Input, Text, VStack } from 'native-base';
 import React, { useEffect, useState } from 'react';
 import { IOrder, IProductItem, IProduct } from '../../../types/order';
 import uuid from 'react-native-uuid';
 import { ProductItem } from './ProductItem';
+import { Tip } from './Tip';
 
 interface IOrderItemProps {
   order: IOrder;
@@ -21,6 +22,7 @@ export const OrderItem = ({
   );
 
   const [productToSearch, setProductToSearch] = useState('');
+  const [tip, setTip] = useState<number>(order.tip || 0);
 
   const filteredProducts = [
     {
@@ -47,14 +49,15 @@ export const OrderItem = ({
   useEffect(() => {
     onChangeOrder({
       orderItems: orderProducts,
-      total: orderProducts.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue.subtotal;
-      }, 0),
-      tip: 0,
+      total:
+        orderProducts.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.subtotal;
+        }, 0) + tip,
+      tip,
       id: order.id,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orderProducts]);
+  }, [orderProducts, tip]);
 
   const onSelectProduct = (product: IProduct) => {
     const myuuid = uuid.v4() as string;
@@ -129,10 +132,21 @@ export const OrderItem = ({
                     return clone;
                   });
                 }}
+                readonly={readonly}
               />
             ))
           : null}
       </VStack>
+
+      <Box px={5}>
+        <Tip
+          tip={tip}
+          onIncludeTip={(tip: number) => {
+            setTip(tip);
+          }}
+          readonly={readonly}
+        />
+      </Box>
 
       <Center py={5}>
         <Heading size="md" alignSelf="center" pt={2} color="primary.900">

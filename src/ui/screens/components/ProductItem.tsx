@@ -6,16 +6,16 @@ import { IProductItem } from '../../../types/order';
 interface IProductItemProps {
   productItem: IProductItem;
   onChangeSubtotal: (orderItem: IProductItem) => void;
+  readonly?: boolean;
 }
 
 export const ProductItem = ({
   productItem: productItemFromProps,
   onChangeSubtotal,
+  readonly = false,
 }: IProductItemProps) => {
   const [productItem, setProductItem] =
     useState<IProductItem>(productItemFromProps);
-
-  // const image = require(productItem.product.image);
 
   const handleChangeQuantity = (quantity: number) => {
     setProductItem(prev => {
@@ -47,6 +47,7 @@ export const ProductItem = ({
         ${productItem.subtotal}
       </Text>
       <Input
+        isReadOnly={readonly}
         value={`${productItem.quantity}`}
         keyboardType="numeric"
         size="xs"

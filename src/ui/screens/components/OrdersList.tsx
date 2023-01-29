@@ -6,9 +6,14 @@ import { OrderItem } from './OrderItem';
 interface IOrdersListProps {
   orders: IOrder[];
   setOrders: Dispatch<SetStateAction<IOrder[]>>;
+  readonly?: boolean;
 }
 
-export const OrdersList = ({ orders, setOrders }: IOrdersListProps) => {
+export const OrdersList = ({
+  orders,
+  setOrders,
+  readonly = false,
+}: IOrdersListProps) => {
   return (
     <VStack space={3}>
       {orders.map((order, index) => (
@@ -23,6 +28,7 @@ export const OrdersList = ({ orders, setOrders }: IOrdersListProps) => {
               return clone;
             });
           }}
+          readonly={readonly}
         />
       ))}
     </VStack>
