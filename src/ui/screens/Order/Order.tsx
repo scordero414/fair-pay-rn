@@ -6,7 +6,7 @@ import {
   OrderScreenRouteProp,
 } from '../../../types/navigation';
 import { ICheck, IOrder } from '../../../types/order';
-import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, Platform, TouchableWithoutFeedback } from 'react-native';
 import uuid from 'react-native-uuid';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { OrdersList } from '../components/OrdersList';
@@ -34,7 +34,6 @@ export const Order = ({ navigation }: IOrderProps) => {
 
   useEffect(() => {
     const currentCheck = checks.find(check => check.id === currentCheckId);
-    console.log({ currentCheck });
     if (currentCheck) {
       setCheck(currentCheck);
       setOrders(currentCheck?.orders);
@@ -81,6 +80,8 @@ export const Order = ({ navigation }: IOrderProps) => {
   return (
     <VStack flex={1} bgColor="primary.700">
       <KeyboardAwareScrollView
+        enableOnAndroid={true}
+        enableAutomaticScroll={Platform.OS === 'ios'}
         bounces={false}
         showsVerticalScrollIndicator={false}
         style={{ flex: 1 }}
